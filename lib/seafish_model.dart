@@ -7,7 +7,7 @@ class SeaFishModel with ChangeNotifier{
 
   SeaFishModel({required this.name, required this.tunaNumber, required this.size});
 
-  void changeFishNumber(){
+  void changeSeaFishNumber(){
     tunaNumber++;
     notifyListeners();
   }

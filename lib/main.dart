@@ -11,8 +11,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Provider(
-      create: (context) => FishModel(name: 'Salmon', number: 10, size: 'big'),
+    return ChangeNotifierProvider(
+      create: (context) => FishModel(name: 'Salmon', number: 0, size: 'big'),
       child: MaterialApp(
         home: FishOrder(),
       ),
@@ -31,6 +31,7 @@ class FishOrder extends StatelessWidget {
       ),
       body: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
               'Fish name: ${Provider.of<FishModel>(context).name}',
@@ -173,16 +174,19 @@ class SpicyC extends StatelessWidget {
             fontSize: 16, color: Colors.red, fontWeight: FontWeight.bold),
       ),
       Text(
-        'Fish size: ${Provider.of<FishModel>(context).size}',
+        'Fish size: ${Provider.of<FishModel>(context, listen: false).size}',
         style: TextStyle(
             fontSize: 16, color: Colors.red, fontWeight: FontWeight.bold),
       ),
       SizedBox(
         height: 20,
       ),
+      ElevatedButton(
+        onPressed: (){
+          Provider.of<FishModel>(context, listen: false).changeFishNumber();
+        },
+        child: Text('Change fish number'),
+      ),
     ]);
   }
 }
-
-
-
